@@ -13,6 +13,12 @@
       NewFarmController (optional if config.xml provided):
         Hostname of the XenApp 7.x DDC.
 
+      .PARAMETER
+        'OldFarmController' - 6.5 Farm controller to retrieve application information from.
+
+      .PARAMETER
+        'NewFarmController' - 7.5 Farm controller to retrieve application information from and where applications will be created/migrated.
+
       .EXAMPLE
       C:\PS> AppMigrate.ps1 
       No command line parameters provided. Will look for config.xml
@@ -30,7 +36,7 @@
       .NOTES
       Must be ran from a controller with both the old 6.5 SDK and the 7.x version.
 
-      
+
       By Damon Batey January 3, 2019
       damonbatey@gmail.com
 #>
@@ -40,18 +46,18 @@ Param(
 )
 
 # Grab the required Snapins
-$SnapInsAvailable = Get-PSSnapin -Registered -Name Citrix.XenApp.Commands, Citrix.Broker.Admin.V2 -ErrorAction SilentlyContinue
+$SnapInsAvailable = Get-PSSnapin -Registered -Name Citrix.XenApp.Commands, Citrix.Broker.Admin.V2, Citrix.Configuration.Admin.V2 -ErrorAction SilentlyContinue
 # Get the number of them
 $SnapInsAvailableCount = $($SnapInsAvailable | Measure-Object).Count
 
 # Check if both required snapins are registered on this system. There should be 2.
-If ($SnapInsAvailableCount -lt 2) {
+If ($SnapInsAvailableCount -lt 3) {
     # Write-LogEntry -EventID 3201 -EntryType 1 -Message $("Required PVS/Citrix Snapins not available: Citrix.XenApp.Commands, Citrix.Broker.Admin.V2")
-    Write-Error -Message $("Required PVS/Citrix Snapins not available: Citrix.XenApp.Commands, Citrix.Broker.Admin.V2") -ErrorAction Stop
+    Write-Error -Message $("Required PVS/Citrix Snapins not available: Citrix.XenApp.Commands, Citrix.Broker.Admin.V2, Citrix.Configuration.Admin.V2") -ErrorAction Stop
     Exit
 }
 Else {
-    Add-PSSnapin -Name Citrix.XenApp.Commands, Citrix.Broker.Admin.V2
+    Add-PSSnapin -Name Citrix.XenApp.Commands, Citrix.Broker.Admin.V2, Citrix.Configuration.Admin.V2
 }
 
 # The following function is from http://ramblingcookiemonster.github.io/Join-Object/
