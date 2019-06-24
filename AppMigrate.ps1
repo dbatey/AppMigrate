@@ -50,9 +50,8 @@ $SnapInsAvailable = Get-PSSnapin -Registered -Name Citrix.XenApp.Commands, Citri
 # Get the number of them
 $SnapInsAvailableCount = $($SnapInsAvailable | Measure-Object).Count
 
-# Check if both required snapins are registered on this system. There should be 2.
+# Check if all required snapins are registered on this system. There should be 3.
 If ($SnapInsAvailableCount -lt 3) {
-    # Write-LogEntry -EventID 3201 -EntryType 1 -Message $("Required PVS/Citrix Snapins not available: Citrix.XenApp.Commands, Citrix.Broker.Admin.V2")
     Write-Error -Message $("Required PVS/Citrix Snapins not available: Citrix.XenApp.Commands, Citrix.Broker.Admin.V2, Citrix.Configuration.Admin.V2") -ErrorAction Stop
     Exit
 }
