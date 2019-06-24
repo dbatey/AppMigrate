@@ -13,12 +13,6 @@
       NewFarmController (optional if config.xml provided):
         Hostname of the XenApp 7.x DDC.
 
-      .PARAMETER
-        'OldFarmController' - 6.5 Farm controller to retrieve application information from.
-
-      .PARAMETER
-        'NewFarmController' - 7.5 Farm controller to retrieve application information from and where applications will be created/migrated.
-
       .EXAMPLE
       C:\PS> AppMigrate.ps1 
       No command line parameters provided. Will look for config.xml
@@ -35,7 +29,6 @@
 
       .NOTES
       Must be ran from a controller with both the old 6.5 SDK and the 7.x version.
-
 
       By Damon Batey January 3, 2019
       damonbatey@gmail.com
