@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FarmMigration>
+	<OldFarm>
+		<Controller hostname="" />
+	</OldFarm>
+	<NewFarm>
+		<Controller hostname="" />
+	</NewFarm>
+</FarmMigration>
