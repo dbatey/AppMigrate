@@ -6,6 +6,10 @@
       .DESCRIPTION
       Provides a GUI for migrating published applications from XenApp 6.5 to 7.x. Will take either command line parameters or config.xml for farm configuration.
 
+      .PARAMETER OldFarmController
+        
+      .PARAMETER NewFarmController
+
       .INPUTS    
       OldFarmController (optional if config.xml provided): 
         Hostname of the XenApp 6.5 ZDC.
@@ -32,6 +36,7 @@
 
       By Damon Batey January 3, 2019
       damonbatey@gmail.com
+      linkedin.com/in/damo/
 #>
 Param(
     [string]$OldFarmController,
@@ -731,6 +736,7 @@ Function Show-Info {
     $AppTextBox.location = New-Object System.Drawing.Point(10, 10)
     $AppTextBox.ReadOnly = $true
     $AppTextBox.Font = 'Lucida Console,8'
+     
     ForEach ($line in $Info) {
         $AppTextBox.AppendText(($line | Select * | Out-String))
     }
@@ -830,7 +836,7 @@ Function Initialize {
                     Write-Error -Message "You must provide Old and New Farm information via either command line or config.xml." -ErrorAction Stop
                 }
                 Catch {
-                    Throw "Please provide config inforamtion."
+                    Throw "Please provide config information."
                 }
             }
         }
